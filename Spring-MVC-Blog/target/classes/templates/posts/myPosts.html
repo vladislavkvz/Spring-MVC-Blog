@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+    <title>All Posts</title>
+</head>
+<body>
+<header th:replace="layout :: site-header" />
+<div class="content">
+    <article th:each="p : ${posts}">
+        <h2 class="title">
+            <a th:href="@{/posts/view/{id}/(id=${p.id})}" th:text="${p.title}"></a>
+        </h2>
+        <div class="date">
+            <i>Posted on</i>
+            <span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}"></span>
+        </div>
+        <p class="content" th:utext="${p.body}"></p>
+        <div class="btn">
+            <a th:href="@{/posts/edit/{id}/(id=${p.id})}">Update</a>
+        </div>
+        <div class="btn">
+            <a class="dng" th:href="@{/posts/delete/{id}/(id=${p.id})}">DELETE</a>
+        </div>
+    </article>
+</div>
+<footer th:replace="layout :: site-footer" />
+</body>
+</html>
